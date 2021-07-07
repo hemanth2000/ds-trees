@@ -93,33 +93,21 @@ private:
 
         if (b > 1)
         {
-            if (val < root->val)
+            if (val > root->val)
             {
-                //Case 1: Left left
-
-                return rightRotate(root);
-            }
-            else
-            {
-                // Case 2: Left right
                 root->right = leftRotate(root->right);
-                return rightRotate(root);
             }
+            return rightRotate(root);
         }
         else if (b < -1)
         {
-            if (val > root->val)
-            {
-                // Case 3: Right right
 
-                return leftRotate(root);
-            }
-            else
+            if (val < root->val)
             {
-                //Case 4: Right left
                 root->left = rightRotate(root->left);
-                return leftRotate(root);
             }
+
+            return leftRotate(root);
         }
 
         return root;
