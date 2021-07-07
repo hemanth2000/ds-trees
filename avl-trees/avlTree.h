@@ -102,8 +102,8 @@ private:
             else
             {
                 // Case 2: Left right
-
-                return rightRotate(leftRotate(root));
+                root->right = leftRotate(root->right);
+                return rightRotate(root);
             }
         }
         else if (b < -1)
@@ -117,9 +117,85 @@ private:
             else
             {
                 //Case 4: Right left
-
-                return leftRotate(rightRotate(root));
+                root->left = rightRotate(root->left);
+                return leftRotate(root);
             }
+        }
+
+        return root;
+    }
+
+    AVLNode *deleteNode(AVLNode *root, int val)
+    {
+
+        if (root == nullptr)
+        {
+            return root;
+        }
+        else if (root->val == val)
+        {
+
+            if (root->left == nullptr && root->right == nullptr)
+            {
+                return nullptr;
+            }
+            else if (root->left == nullptr)
+            {
+
+                AVLNode *temp = root->right;
+                root->right = nullptr;
+                delete root;
+                return temp;
+            }
+            else if (root->right == nullptr)
+            {
+
+                AVLNode *temp = root->left;
+                root->left = nullptr;
+                delete root;
+                return temp;
+            }
+
+            AVLNode *temp = root->left;
+
+            while (temp->right)
+            {
+                temp = temp->right;
+            }
+
+            root->val = temp->val;
+            deleteNode(root->left, root->val);
+        }
+        else if (root->val > val)
+        {
+            root->left = deleteNode(root->left, val);
+        }
+        else if (root->val < val)
+        {
+            root->right = deleteNode(root->right, val);
+        }
+
+        setHeight(root);
+        int b = balance(root);
+
+        if (b > 1)
+        {
+
+            if (balance(root->left) < 0)
+            {
+                root->left = leftRotate(root->left);
+            }
+            return rightRotate(root);
+        }
+
+        if (b < -1)
+        {
+            if (balance(root->right) > 0)
+            {
+                root->right = rightRotate(root->right);
+            }
+
+            return leftRotate(root);
         }
 
         return root;
@@ -255,6 +331,7 @@ public:
 
     void deleteNode(int val)
     {
+        root = deleteNode(root, val);
     }
 
     ~AVLTree()
