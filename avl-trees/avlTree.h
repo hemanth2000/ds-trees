@@ -89,15 +89,20 @@ private:
 
         int b = balance(root);
 
+        // Four possible positions of new node wrt to current root node.
+
         if (b > 1)
         {
-            //Case 1: Left left
             if (val < root->val)
             {
+                //Case 1: Left left
+
                 return rightRotate(root);
             }
             else
             {
+                // Case 2: Left right
+
                 return rightRotate(leftRotate(root));
             }
         }
@@ -105,10 +110,14 @@ private:
         {
             if (val > root->val)
             {
+                // Case 3: Right right
+
                 return leftRotate(root);
             }
             else
             {
+                //Case 4: Right left
+
                 return leftRotate(rightRotate(root));
             }
         }
@@ -239,9 +248,17 @@ public:
                 pendingNodes.push(nullNode);
             }
         }
+
+        delete nullNode;
+        delete lvlEnd;
     }
 
     void deleteNode(int val)
     {
+    }
+
+    ~AVLTree()
+    {
+        delete root;
     }
 };

@@ -14,4 +14,10 @@ public:
         right = nullptr;
         height = 1;
     }
+
+    ~AVLNode()
+    {
+        delete left;
+        delete right;
+    }
 };
