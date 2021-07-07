@@ -84,22 +84,33 @@ private:
         else if (root->val == val)
         {
 
-            if (root->left)
+            if (root->left == nullptr && root->right == nullptr)
+            {
+                return nullptr;
+            }
+            else if (root->left == nullptr)
+            {
+                BinaryNode *temp = root->right;
+                root->right = nullptr;
+                delete root;
+                return temp;
+            }
+            else if (root->right == nullptr)
             {
                 BinaryNode *temp = root->left;
-                while (temp->right)
-                {
-                    temp = temp->right;
-                }
-
-                temp->right = root->right;
-
-                return root->left;
+                root->left = nullptr;
+                delete root;
+                return temp;
             }
-            else
+
+            BinaryNode *temp = root->left;
+            while (temp->right)
             {
-                return root->right;
+                temp = temp->right;
             }
+
+            root->val = temp->val;
+            root->left = deleteNode(root->left, root->val);
         }
         else if (root->val > val)
         {
@@ -130,7 +141,7 @@ public:
     void deleteNode(int val)
     {
         root = deleteNode(root, val);
-        }
+    }
 
     void inOrder()
     {
