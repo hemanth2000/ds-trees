@@ -130,7 +130,7 @@ public:
     void deleteNode(int val)
     {
         root = deleteNode(root, val);
-    }
+        }
 
     void inOrder()
     {
