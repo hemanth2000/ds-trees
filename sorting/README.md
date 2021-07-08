@@ -1,7 +1,6 @@
 # Sorting Algorithms
 
-Sorting is one of the most important operations that is used to retrieve information from data stream.
-There are different sorting techniques each having their own strengths and weakness. Some of the widely famous sorting methods are:
+Sorting is one of the most important operations that are used to retrieve the information or queries in short time. There are different sorting techniques each having their own strengths and weakness. Some of the common sorting methods are:
 
 1. Bubble sort
 2. Selection sort
